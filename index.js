@@ -75,7 +75,7 @@ async function logWithDelay(message) {
         setTimeout(() => {
             console.log(message);
             resolve();
-        }, 300);
+        }, 150);
     });
 }
 
