@@ -28,8 +28,9 @@ At the end of the script, the total size of all deleted files is displayed to th
 
 After the temporary files have been deleted, the script prompts the user to either retry the script or exit. This allows the user to easily delete temporary files multiple times if needed.
 
-## Usage
+## Usage OF Exe OR CMD
 
+### You can just run the `Cleaner.exe` file to run the process OR
 1. Ensure you have [Node.js](https://nodejs.org/) installed on your system.
 2. Clone or download the repository.
 3. Open a command prompt and navigate to the project directory.
