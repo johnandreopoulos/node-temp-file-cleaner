@@ -33,8 +33,9 @@ After the temporary files have been deleted, the script prompts the user to eith
 1. Ensure you have [Node.js](https://nodejs.org/) installed on your system.
 2. Clone or download the repository.
 3. Open a command prompt and navigate to the project directory.
-4. Run the script with `node index.js`.
-5. Follow the prompts to delete temporary files.
+4. Run `npm i` to install all the required node modules.
+5. Run the script with `node index.js`.
+6. Follow the prompts to delete temporary files.
 ![cmd_A544dykjX5](https://user-images.githubusercontent.com/39243722/211149243-db6c4403-5f36-493f-b6d3-2583ae828ff1.gif)
 
 
