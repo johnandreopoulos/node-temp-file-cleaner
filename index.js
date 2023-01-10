@@ -4,6 +4,7 @@ const fs = require('fs');
 const os = require('os');
 const path = require('path');
 const readline = require('readline');
+const { exec } = require('child_process');
 
 function formatSize(size) {
     if (size < 1000) return `${size} bytes`;
@@ -77,38 +78,29 @@ async function logWithDelay(message) {
     });
 }
 
-async function retry() {
-    while (true) {
-        console.log("\n" + "—".repeat(50).green + "\n");
-        console.log("GitHub: " + "https://github.com/JohnAndreop".yellow);
-        console.log("1. ".yellow + "Repeat the process");
-        console.log("2. ".yellow + "Exit");
-
-        const answer = await new Promise((resolve) => {
-            rl.question("Please enter your choice: ", (answer) => {
-                resolve(answer);
-            });
-        });
-        if (!answer) {
-            console.log("Please enter a valid choice".red);
-            continue;
-        }
-        if (answer === '1') {
-            console.clear();
-            await deleteTempFiles();
-            continue;
-        }
-        if (answer === '2') {
-            process.exit();
-        }
-    }
-}
-
 async function main() {
-    await welcome();
-    await deleteTempFiles();
-    await retry();
-    rl.close();
+    let exec = require("child_process").exec; // eslint-disable-line 
+    let isWindows = (require("os").platform().indexOf("win32") >= 0); // eslint-disable-line
+
+    if (!isWindows) return console.log("This tool is only for Windows");
+
+    exec("net session", async function (err, stdout, stderr) {
+        if (err) {
+            return console.log("You must run this tool as administrator".red);
+        } else {
+            await welcome();
+            await deleteTempFiles();
+            console.log("Press any key to exit...");
+            process.stdin.setRawMode(true);
+            process.stdin.resume();
+            process.stdin.on("data", process.exit.bind(process, 0));
+        }
+    });
+    console.log("Press any key to exit...");
+    process.stdin.setRawMode(true);
+    process.stdin.resume();
+    process.stdin.on("data", process.exit.bind(process, 0));
 }
+
 
 main();
