@@ -24,9 +24,7 @@ async function welcome() {
     console.log(
         "— Welcome to our Temp File Clearing Tool!".green
     );
-    console.log(
-        "— Are you tired of constantly having to manually search for and delete ".grey + "temporary files".red + " on your computer? Our tool makes it easy to clean up all those pesky temp files that can slow down your system and take up valuable storage space. With just a few clicks, you can say goodbye to all those unnecessary files and hello to a faster and more efficient computer. Thank you for choosing our tool and we hope it helps to improve your computing experience. *".grey
-    );
+    console.log("— Are you tired of constantly having to manually search for and delete ".grey + "temporary files".red + " on your computer? Our tool makes it easy to clean up all those pesky temp files that can slow down your system and take up valuable storage space. With just a few clicks, you can say goodbye to all those unnecessary files and hello to a faster and more efficient computer. Thank you for choosing our tool and we hope it helps to improve your computing experience. *".grey);
     console.log("—".repeat(50).green);
     console.log("—".repeat(50).green);
     console.log("\n");
@@ -46,19 +44,19 @@ async function deleteTempFiles() {
     console.log('[-]'.cyan + ' Deleting temporary files... (This may take a while)\n'.yellow);
 
     await Promise.all(tempDirs.map(async tempDir => {
-        const files = await fs.promises.readdir(tempDir);
-        for (const file of files) {
-            const filePath = path.join(tempDir, file);
-            const stats = await fs.promises.stat(filePath);
-            if (stats.isDirectory()) continue;
-            try {
+        try {
+            const files = await fs.promises.readdir(tempDir);
+            for (const file of files) {
+                const filePath = path.join(tempDir, file);
+                const stats = await fs.promises.stat(filePath);
+                if (stats.isDirectory()) continue;
                 await fs.promises.unlink(filePath);
                 await logWithDelay(`[+] Deleted ${file.yellow} ${formatSize(stats.size).green}`);
                 totalSize += stats.size;
                 fileCount.push(file);
-            } catch (error) {
-                null;
             }
+        } catch (e) {
+            null
         }
     }));
 
