@@ -68,6 +68,13 @@ async function logWithDelay(message) {
     });
 }
 
+async function typeToExit() {
+    console.log("Press any key to exit...");
+    process.stdin.setRawMode(true);
+    process.stdin.resume();
+    process.stdin.on("data", process.exit.bind(process, 0));
+}
+
 async function main() {
     let exec = require("child_process").exec; // eslint-disable-line 
     let isWindows = (require("os").platform().indexOf("win32") >= 0); // eslint-disable-line
@@ -80,16 +87,10 @@ async function main() {
         } else {
             await welcome();
             await deleteTempFiles();
-            console.log("Press any key to exit...");
-            process.stdin.setRawMode(true);
-            process.stdin.resume();
-            process.stdin.on("data", process.exit.bind(process, 0));
+            await typeToExit();
         }
     });
-    console.log("Press any key to exit...");
-    process.stdin.setRawMode(true);
-    process.stdin.resume();
-    process.stdin.on("data", process.exit.bind(process, 0));
+    await typeToExit();
 }
 
 main();
