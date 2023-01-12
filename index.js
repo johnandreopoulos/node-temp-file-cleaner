@@ -14,17 +14,11 @@ function formatSize(size) {
     else return `${(size / 1000000000000).toFixed(2)}TB`;
 }
 
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
 
 async function welcome() {
     console.log("\n" + "—".repeat(50).green);
     console.log("—".repeat(50).green);
-    console.log(
-        "— Welcome to our Temp File Clearing Tool!".green
-    );
+    console.log("— Welcome to our Temp File Clearing Tool!".green);
     console.log("— Are you tired of constantly having to manually search for and delete ".grey + "temporary files".red + " on your computer? Our tool makes it easy to clean up all those pesky temp files that can slow down your system and take up valuable storage space. With just a few clicks, you can say goodbye to all those unnecessary files and hello to a faster and more efficient computer. Thank you for choosing our tool and we hope it helps to improve your computing experience. *".grey);
     console.log("—".repeat(50).green);
     console.log("—".repeat(50).green);
@@ -61,12 +55,8 @@ async function deleteTempFiles() {
         }
     }));
 
-    if (fileCount.length === 0) {
-        console.log("No temporary files were found".bgRed.white);
-        return;
-    } else {
-        console.log(`\n—— Deleted ${formatSize(totalSize).green} of temporary files`);
-    }
+    if (fileCount.length === 0) return console.log("No temporary files were found".bgRed.white);
+    else return console.log(`\n—— Deleted ${formatSize(totalSize).green} of temporary files`);
 }
 
 async function logWithDelay(message) {
@@ -74,7 +64,7 @@ async function logWithDelay(message) {
         setTimeout(() => {
             console.log(message);
             resolve();
-        }, 150);
+        }, 100);
     });
 }
 
@@ -84,7 +74,7 @@ async function main() {
 
     if (!isWindows) return console.log("This tool is only for Windows");
 
-    exec("net session", async function (err, stdout, stderr) {
+    exec("net session", async function (err) {
         if (err) {
             return console.log("You must run this tool as administrator".red);
         } else {
@@ -101,6 +91,5 @@ async function main() {
     process.stdin.resume();
     process.stdin.on("data", process.exit.bind(process, 0));
 }
-
 
 main();
