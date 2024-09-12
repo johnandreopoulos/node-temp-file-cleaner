@@ -1,46 +1,42 @@
 # Temp File Clearing Tool
 
-This Node.js script is a command-line utility that helps users clear temporary files from their computer. These files can take up valuable storage space and slow down system performance, so it's important to periodically delete them.
+The Temp File Clearing Tool is a command-line utility developed in Node.js for efficiently removing temporary files from your computer. Temporary files can accumulate over time, consuming valuable storage and slowing down system performance. This tool simplifies the cleanup process, allowing you to reclaim storage space with ease.
 
-Our tool makes it easy to clean up all those pesky temp files with just a few clicks. It searches for and deletes temporary files in several directories, including:
+## Key Features
+
+- **Human-Readable File Sizes**: Displays file sizes in easily understandable units (e.g., `1KB`, `2MB`, `3GB`).
+- **Parallel Deletion**: Utilizes asynchronous operations to delete multiple temporary files simultaneously, enhancing performance.
+- **Detailed Logging**: Provides real-time updates on the names and sizes of deleted files, and summarizes the total amount of space reclaimed.
+- **Retry or Exit Option**: After the cleanup, you can choose to run the script again or exit.
+
+## Supported Directories
+
+The tool targets temporary files in the following locations:
 
 - `os.tmpdir()`
 - `X:\Windows\Temp`
 - `X:\Users\{username}\AppData\Local\Temp`
 - `X:\Windows\Prefetch`
 
-## Features
+## How to Use
 
-- Formats file sizes for readability (e.g. `1KB`, `2MB`, `3GB`, etc.)
-The `formatSize` function takes in a file size in bytes and returns a human-readable string representation of the size. For example, `formatSize(1024)` would return `1KB`.
+### Using the Executable
 
-- Asynchronously deletes temporary files in parallel
-The script uses the `Promise.all` method to asynchronously delete the temporary files in parallel. This helps to improve the performance of the script, as it can delete multiple files at the same time rather than waiting for each one to be deleted before moving on to the next.
+You can run the `Cleaner.exe` file directly to start the cleanup process.
 
-- Logs the names and sizes of deleted files to the console
-- Displays the total size of deleted files at the end
+### Using Command Line
 
-As the script is deleting each temporary file, it logs the name and size of the file to the console using the logWithDelay function. This function introduces a delay between log messages to make it easier to read the output.
-
-At the end of the script, the total size of all deleted files is displayed to the user.
-
-- Provides an option to retry the script or exit
-
-After the temporary files have been deleted, the script prompts the user to either retry the script or exit. This allows the user to easily delete temporary files multiple times if needed.
-
-## Usage OF Exe OR CMD
-
-### You can just run the `Cleaner.exe` file to run the process OR
-1. Ensure you have [Node.js](https://nodejs.org/) installed on your system.
+1. Ensure [Node.js](https://nodejs.org/) is installed on your system.
 2. Clone or download the repository.
-3. Open a command prompt as an Administrator and navigate to the project directory. `cd PATH`
-4. Run `npm i` to install all the required node modules.
-5. Run the script with `node index.js`.
-6. Follow the prompts to delete temporary files.
+3. Open a command prompt as an Administrator and navigate to the project directory using `cd PATH`.
+4. Install required dependencies with `npm install`.
+5. Execute the script with `node index.js`.
+6. Follow the on-screen instructions to delete temporary files.
+
 ![cmd_A544dykjX5](https://user-images.githubusercontent.com/39243722/211149243-db6c4403-5f36-493f-b6d3-2583ae828ff1.gif)
 
-
 ## Example Output
+
 ```
 [-] Deleting temporary files... (This may take a while)
 
@@ -54,3 +50,5 @@ After the temporary files have been deleted, the script prompts the user to eith
 
 Would you like to retry or exit?
 ```
+
+This tool ensures a smooth and efficient cleanup process, helping you maintain optimal system performance.
